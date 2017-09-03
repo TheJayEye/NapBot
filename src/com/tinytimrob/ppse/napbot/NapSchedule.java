@@ -2,7 +2,7 @@ package com.tinytimrob.ppse.napbot;
 
 public enum NapSchedule
 {
-	BIPHASIC("Biphasic", "Biphasic", NapRole.BIPHASIC, true,//
+	BIPHASIC("Biphasic", "Biphasic", NapRole.BIPHASIC,//
 			"30lbn", //
 			"6 hours 20 minutes", //
 			"Origin of Everyman sleep, biphasic sleep", //
@@ -12,7 +12,7 @@ public enum NapSchedule
 			"Core at midnight, nap around noon", //
 			"Most commonly used", //
 			""), //
-	DC1("DC1", "Dual Core 1", NapRole.DUAL_CORE, true,//
+	DC1("DC1", "Dual Core 1", NapRole.DUAL_CORE,//
 			"mf93j", //
 			"5 hours 20 minutes", //
 			"Dual Core sleep", //
@@ -22,7 +22,7 @@ public enum NapSchedule
 			"Dusk core around 21:00 to 22:00, dawn core is free to place till 07:00 or 08:00, REM nap around noon or early afternoon", //
 			"Rather high, most popular of Dual Core sleep.", //
 			""), //
-	DC2("DC2", "Dual Core 2", NapRole.DUAL_CORE, true,//
+	DC2("DC2", "Dual Core 2", NapRole.DUAL_CORE,//
 			"h58rh", //
 			"4 hours 40 minutes", //
 			"Dual Core sleep", //
@@ -32,7 +32,7 @@ public enum NapSchedule
 			"First core around 21:00, second core around 02:00, dawn nap before work, noon-early-afternoon nap", //
 			"Very low", //
 			""), //
-	DC3("DC3", "Dual Core 3", NapRole.DUAL_CORE, true,//
+	DC3("DC3", "Dual Core 3", NapRole.DUAL_CORE,//
 			"arx4r", //
 			"4 hours", //
 			"Dual Core sleep", //
@@ -42,7 +42,7 @@ public enum NapSchedule
 			"3-hour wake between 2 cores, dawn nap, noon nap and afternoon nap", //
 			"Very low", //
 			""), //
-	DC4("DC4", "Dual Core 4", NapRole.DUAL_CORE, true,//
+	DC4("DC4", "Dual Core 4", NapRole.DUAL_CORE,//
 			"qtny6", //
 			"4 hours 20 minutes", //
 			"Dual Core sleep", //
@@ -52,7 +52,7 @@ public enum NapSchedule
 			"Sleeps are scheduled to start every 4 hours which resembles Uberman. Transition step to E5 or Uberman and also useful as a fallback from E5 or Uberman should adaptation fail.", //
 			"Virtually non-existent, generally inferior to DC3 unless keeping Uberman rhythm is useful", //
 			""), //
-	DYMAXION("Dymaxion", "Dymaxion", NapRole.SUPERHUMAN, true,//
+	DYMAXION("Dymaxion", "Dymaxion", NapRole.SUPERHUMAN,//
 			"zgqtz", //
 			"2 hours", //
 			"Ultrashort naps", //
@@ -62,7 +62,7 @@ public enum NapSchedule
 			"Arranging naps to fit in 4 aforementioned circadian needs to rest", //
 			"Decent", //
 			""), //
-	E2("E2", "Everyman 2", NapRole.EVERYMAN, true,//
+	E2("E2", "Everyman 2", NapRole.EVERYMAN,//
 			"fflmu", //
 			"5 hours 10 minutes", //
 			"Everyman sleep", //
@@ -72,7 +72,7 @@ public enum NapSchedule
 			"Core close to midnight, nap before work, early-afternoon nap", //
 			"High", //
 			""), //
-	E3("E3", "Everyman 3", NapRole.EVERYMAN, true,//
+	E3("E3", "Everyman 3", NapRole.EVERYMAN,//
 			"2b62f", //
 			"4 hours", //
 			"Everyman sleep", //
@@ -82,7 +82,7 @@ public enum NapSchedule
 			"Core as close to dusk as possible to gain more SWS, one nap around 04:00, one nap post-dawn, one early-afternoon nap. All naps should contain REM and little light sleep only.", //
 			"Very high. Most famous of all Everyman schedules.", //
 			""), //
-	E4("E4", "Everyman 4", NapRole.EVERYMAN, true,//
+	E4("E4", "Everyman 4", NapRole.EVERYMAN,//
 			"jkfzt", //
 			"2 hours 50 minutes", //
 			"Everyman sleep", //
@@ -92,7 +92,7 @@ public enum NapSchedule
 			"Core before midnight, 2 naps before the day starts, noon nap, afternoon nap", //
 			"Low", //
 			""), //
-	E5("E5", "Everyman 5", NapRole.EVERYMAN, true,//
+	E5("E5", "Everyman 5", NapRole.EVERYMAN,//
 			"coamr", //
 			"3 hours 10 minutes", //
 			"Everyman sleep", //
@@ -102,7 +102,7 @@ public enum NapSchedule
 			"Sleeps are scheduled to start every 4 hours which resembles Uberman. Transition step between DC4 and Uberman and also useful as a fallback from Uberman should adaptation fail.", //
 			"Non-existent, generally inferior to E4 unless keeping Uberman rhythm is useful", //
 			""), //
-	NAPTATION("Naptation", "Naptation", NapRole.SUPERHUMAN, true,//
+	NAPTATION("Naptation", "Naptation", NapRole.SUPERHUMAN,//
 			"90uzo", //
 			"Up to 4 hours (up to 12 20-min naps per day)", //
 			"Ultrashort naps", //
@@ -112,7 +112,7 @@ public enum NapSchedule
 			"Nap once every 1.7 hours", //
 			"Rising", //
 			""), //
-	QUADPHASIC("Quadphasic", "Quadphasic", NapRole.DUAL_CORE, true,//
+	QUADPHASIC("Quadphasic", "Quadphasic", NapRole.DUAL_CORE,//
 			"qamnm", //
 			"4 hours", //
 			"Dual Core sleep, Dymaxion naps", //
@@ -122,7 +122,7 @@ public enum NapSchedule
 			"The whole schedule’s sleep distribution looks like Dymaxion's- one core before midnight, one core around dawn, one noon nap, one afternoon/evening nap.", //
 			"Very low", //
 			""), //
-	SPAMAYL("SPAMAYL", "Sleep Polyphasically As Much As You Like", NapRole.SUPERHUMAN, true,//
+	SPAMAYL("SPAMAYL", "Sleep Polyphasically As Much As You Like", NapRole.SUPERHUMAN,//
 			"yh1pp", //
 			"Undefined, but on average 2.5 hours (7-8 20-min naps per day)", //
 			"Ultrashort naps", //
@@ -132,7 +132,7 @@ public enum NapSchedule
 			"Most naps should be spread during graveyard hours to avoid the need to nap during the day with work, social life, etc", //
 			"Rather low", //
 			""), //
-	SEGMENTED("Segmented", "Segmented", NapRole.BIPHASIC, true,//
+	SEGMENTED("Segmented", "Segmented", NapRole.BIPHASIC,//
 			"k0mot", //
 			"7 hours", //
 			"Origin of Dual Core sleep, biphasic sleep", //
@@ -142,7 +142,7 @@ public enum NapSchedule
 			"1 core around 21:00, should not be later than 22:00ish, 1 core till morning", //
 			"Rather high", //
 			""), //
-	SIESTA("Siesta", "Siesta", NapRole.BIPHASIC, true,//
+	SIESTA("Siesta", "Siesta", NapRole.BIPHASIC,//
 			"e72xy", //
 			"6 hours 30 minutes", //
 			"Biphasic sleep", //
@@ -152,7 +152,7 @@ public enum NapSchedule
 			"Core around midnight, nap at noon", //
 			"Europe, generally inferior to Biphasic", //
 			""), //
-	TESLA("Tesla", "Tesla", NapRole.SUPERHUMAN, true,//
+	TESLA("Tesla", "Tesla", NapRole.SUPERHUMAN,//
 			"s2x5u", //
 			"1 hour 20 minutes", //
 			"Ultrashort naps", //
@@ -162,7 +162,7 @@ public enum NapSchedule
 			"Arranging naps to fit in 4 aforementioned circadian needs to rest", //
 			"Very low", //
 			""), //
-	TC1("TC1", "Tri Core 1", NapRole.TRI_CORE, true,//
+	TC1("TC1", "Tri Core 1", NapRole.TRI_CORE,//
 			"tocl4", //
 			"4 hours 50 minutes", //
 			"Tri core sleep", //
@@ -172,7 +172,7 @@ public enum NapSchedule
 			"3 core sleeps are concentrated during the night to boost alertness for the whole day, so only one small nap in the afternoon is needed. 3-hour rhythm among each core sleep is recommended. Distance of wake time among each core sleep could be shortened if possible, but should not be less than 2 hours. Such a schedule will include a dusk core, night core, and dawn core.", //
 			"Very low", //
 			""), //
-	TC2("TC2", "Tri Core 2", NapRole.TRI_CORE, true,//
+	TC2("TC2", "Tri Core 2", NapRole.TRI_CORE,//
 			"43swa", //
 			"5 hours 10 minutes", //
 			"Tri core sleep", //
@@ -182,7 +182,7 @@ public enum NapSchedule
 			"Evening core, graveyard core, dawn core and 2 daytime naps", //
 			"Very low", //
 			""), //
-	TRIMAXION("Trimaxion", "Trimaxion", NapRole.EXPERIMENTAL, true,//
+	TRIMAXION("Trimaxion", "Trimaxion", NapRole.EXPERIMENTAL,//
 			"awkwb", //
 			"3 hours", //
 			"Everyman sleep, Dymaxion naps", //
@@ -192,7 +192,7 @@ public enum NapSchedule
 			"Distribution of sleeps resembles Dymaxion's and Quadphasic's. Transition step to Dymaxion and also as a fallback from Dymaxion should adaptation fail.", //
 			"Virtually non-existent", //
 			"This is an **experimental schedule** currently being tested. Results unknown. No signs of successful adaptations."), //
-	TRIPHASIC("Triphasic", "Triphasic", NapRole.TRI_CORE, true,//
+	TRIPHASIC("Triphasic", "Triphasic", NapRole.TRI_CORE,//
 			"8z46u", //
 			"4 hours 30 minutes", //
 			"Tri core sleep", //
@@ -202,7 +202,7 @@ public enum NapSchedule
 			"One core sleep around 21:00, one around 05:30, one around noon", //
 			"Low", //
 			""), //
-	UBERMAN("Uberman", "Uberman", NapRole.SUPERHUMAN, true,//
+	UBERMAN("Uberman", "Uberman", NapRole.SUPERHUMAN,//
 			"omr2x", //
 			"2 hours", //
 			"Ultrashort naps", //
@@ -213,7 +213,7 @@ public enum NapSchedule
 			"Very high", //
 			""), //
 	/*
-	ZOIDBERG("Zoidberg", "Zoidberg", NapRole.EXPERIMENTAL, true,//
+	ZOIDBERG("Zoidberg", "Zoidberg", NapRole.EXPERIMENTAL,//
 			"m7hpg", //
 			"Around 3-4 hours", //
 			"Ultrashort naps", //
@@ -224,7 +224,7 @@ public enum NapSchedule
 			"Virtually non-existent", //
 			"This is an **experimental schedule** currently being tested. Results unknown. No signs of successful adaptations."), //
 	*/
-	EXPERIMENTAL("Experimental", "Experimental", NapRole.EXPERIMENTAL, true,//
+	EXPERIMENTAL("Experimental", "Experimental", NapRole.EXPERIMENTAL,//
 			"", //
 			"", //
 			"", //
@@ -234,7 +234,7 @@ public enum NapSchedule
 			"", //
 			"", //
 			""), //
-	MONOPHASIC("Monophasic", "Monophasic", NapRole.MONOPHASIC, true,//
+	MONO("Mono", "Mono", NapRole.MONOPHASIC,//
 			"q6fkh", //
 			"Around 8 hours", //
 			"Unidentified in polyphasic world", //
@@ -244,17 +244,7 @@ public enum NapSchedule
 			"Core at midnight, wake at 8:00 AM", //
 			"Most popular type of sleep", //
 			""), //
-	MUTATEDMONO("MutatedMono", "Mutated Mono", NapRole.SUPERHUMAN, true,//
-			"yig06", //
-			"", //
-			"", //
-			"", //
-			"", //
-			"", //
-			"", //
-			"", //
-			""), //
-	UNKNOWN("Unknown", "Unknown", NapRole.MONOPHASIC, true,//
+	UNKNOWN("Unknown", "Unknown", NapRole.MONOPHASIC,//
 			"", //
 			"", //
 			"", //
@@ -268,7 +258,6 @@ public enum NapSchedule
 	public final String name;
 	public final String longName;
 	public final NapRole role;
-	public final boolean appendToNick;
 	public final String napchartID;
 	public final String totalSleep;
 	public final String identification;
@@ -279,12 +268,11 @@ public enum NapSchedule
 	public final String popularity;
 	public final String experimental;
 
-	NapSchedule(String name, String longName, NapRole role, boolean appendToNick, String napchartID, String totalSleep, String identification, String specification, String mechanism, String difficulty, String scheduling, String popularity, String experimental)
+	NapSchedule(String name, String longName, NapRole role, String napchartID, String totalSleep, String identification, String specification, String mechanism, String difficulty, String scheduling, String popularity, String experimental)
 	{
 		this.name = name;
 		this.longName = longName;
 		this.role = role;
-		this.appendToNick = appendToNick;
 		this.napchartID = napchartID;
 		this.totalSleep = totalSleep;
 		this.identification = identification;

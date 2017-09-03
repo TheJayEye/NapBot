@@ -121,7 +121,7 @@ public class CommandAboutSchedule implements ICommand
 		{
 			currentMessage = currentMessage + ".";
 		}
-		if (this.schedule != NapSchedule.MONOPHASIC)
+		if (this.schedule != NapSchedule.MONO)
 		{
 			currentMessage = currentMessage + "\n\n**Attempted:** " + attemptedcount + " / " + membercount + " (" + CommonPolyStuff.formatPercentage(attemptedcount, membercount, 2) + " of members)\n**Adapted:** " + adaptedcount + " / " + membercount + " (" + CommonPolyStuff.formatPercentage(adaptedcount, membercount, 2) + " of members, " + CommonPolyStuff.formatPercentage(adaptedcount, attemptedcount, 2) + " of those who attempted the schedule)";
 		}

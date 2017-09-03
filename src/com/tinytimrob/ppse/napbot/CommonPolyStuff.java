@@ -61,14 +61,32 @@ public class CommonPolyStuff
 
 	public static NapSchedule setSchedule(User user, TextChannel channel, String scheduleString)
 	{
+		String scheduleString_ = scheduleString.toLowerCase(Locale.ENGLISH);
 		NapSchedule schedule = null;
+		NapScheduleVariant variant = null;
+		for (NapScheduleVariant variant_ : NapScheduleVariant.values())
+		{
+			String vlc = variant_.name().toLowerCase();
+			if (scheduleString_.endsWith("-" + vlc))
+			{
+				variant = variant_;
+				scheduleString_ = scheduleString_.substring(0, scheduleString_.length() - (vlc.length() + 1));
+				break;
+			}
+			if (scheduleString_.startsWith(vlc + "-"))
+			{
+				variant = variant_;
+				scheduleString_ = scheduleString_.substring(variant.name().length() + 1);
+				break;
+			}
+		}
 		for (NapSchedule schedule_ : NapSchedule.values())
 		{
 			if (schedule == NapSchedule.UNKNOWN)
 			{
 				continue;
 			}
-			if (schedule_.name.equalsIgnoreCase(scheduleString))
+			if (schedule_.name.equalsIgnoreCase(scheduleString_))
 			{
 				schedule = schedule_;
 				break;
@@ -76,14 +94,11 @@ public class CommonPolyStuff
 		}
 		if (schedule == null) // for very lazy people allow some extra strings
 		{
-			switch (scheduleString.toLowerCase())
+			switch (scheduleString_.toLowerCase())
 			{
-			case "mono":
-				schedule = NapSchedule.MONOPHASIC;
+			case "monophasic":
+				schedule = NapSchedule.MONO;
 				break;
-			case "mutated-mono":
-			case "mutated_mono":
-				schedule = NapSchedule.MUTATEDMONO;
 			case "tricore":
 			case "tri-core":
 			case "tri_core":
@@ -106,6 +121,8 @@ public class CommonPolyStuff
 		{
 			return null;
 		}
+		NapRole targetRole = variant == NapScheduleVariant.MUTATED ? NapRole.SUPERHUMAN : schedule.role;
+		String subRoleCode = variant == NapScheduleVariant.MUTATED ? "Mutated" : schedule.name;
 
 		ArrayList<String> napRoles = new ArrayList<String>();
 		for (NapRole role : NapRole.values())
@@ -115,21 +132,21 @@ public class CommonPolyStuff
 		Member member = channel.getGuild().getMember(user);
 		ArrayList<Role> rolesToAdd = new ArrayList<Role>();
 		ArrayList<Role> rolesToRemove = new ArrayList<Role>();
-		rolesToAdd.addAll(channel.getGuild().getRolesByName(schedule.role.name, true));
+		rolesToAdd.addAll(channel.getGuild().getRolesByName(targetRole.name, true));
 		// determine whether this member needs attempted tag
 		List<Role> rolesTheMemberHas = member.getRoles();
-		boolean needsTag = true;
+		boolean needsAttemptedRole = true;
 		for (Role role : rolesTheMemberHas)
 		{
-			if (role.getName().equals("Adapted-" + schedule.name))
+			if (role.getName().equals("Adapted-" + subRoleCode))
 			{
-				needsTag = false;
+				needsAttemptedRole = false;
 				break;
 			}
 		}
-		if (needsTag)
+		if (needsAttemptedRole)
 		{
-			rolesToAdd.addAll(channel.getGuild().getRolesByName("Attempted-" + schedule.name, true));
+			rolesToAdd.addAll(channel.getGuild().getRolesByName("Attempted-" + subRoleCode, true));
 		}
 		for (Role role : rolesTheMemberHas)
 		{
@@ -146,10 +163,7 @@ public class CommonPolyStuff
 		{
 			s = s.substring(0, s.lastIndexOf(" ["));
 		}
-		if (schedule.appendToNick)
-		{
-			s = s + " [" + schedule.name + "]";
-		}
+		s = s + " [" + schedule.name + (variant == null ? "" : "-" + variant.name().toLowerCase()) + "]";
 		try
 		{
 			channel.getGuild().getController().setNickname(member, s).complete();
