@@ -7,6 +7,7 @@ import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.logging.log4j.Logger;
 import com.google.gson.Gson;
@@ -19,6 +20,10 @@ import com.google.gson.GsonBuilder;
 public class CommonUtils
 {
 	public static final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+	static
+	{
+		dateFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+	}
 	private static final Logger log = LogWrapper.getLogger();
 	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
 	public static final Charset charsetUTF8 = Charset.forName("UTF-8");
