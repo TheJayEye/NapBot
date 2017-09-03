@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.appender.ConsoleAppender;
+import org.apache.logging.log4j.core.appender.ConsoleAppender.Target;
 import org.apache.logging.log4j.core.appender.RandomAccessFileAppender;
 import org.apache.logging.log4j.core.appender.RollingRandomAccessFileAppender;
 import org.apache.logging.log4j.core.appender.rolling.DefaultRolloverStrategy;
@@ -42,14 +43,14 @@ public class Logging
 		rootLogger.setLevel(Level.ALL);
 
 		// PATTERNS
-		PatternLayout consolePattern = PatternLayout.createLayout("%d{yyyy-MM-dd HH:mm:ss} [%level] [%logger{1}]: %msg%n", configuration, null, null, true, false, null, null);
-		PatternLayout logfilePattern = PatternLayout.createLayout("%d{yyyy-MM-dd HH:mm:ss} [%level] [%logger]: %msg%n", configuration, null, null, true, false, null, null);
+		PatternLayout consolePattern = PatternLayout.createLayout("%d{yyyy-MM-dd HH:mm:ss} [%level] [%logger{1}]: %msg%n", null, configuration, null, null, true, false, null, null);
+		PatternLayout logfilePattern = PatternLayout.createLayout("%d{yyyy-MM-dd HH:mm:ss} [%level] [%logger]: %msg%n", null, configuration, null, null, true, false, null, null);
 
 		// LOG FILE STRINGS
 		String logFilePrefix = PlatformData.installationDirectory.getAbsolutePath().replace("\\", "/") + "/logs/" + WordUtils.capitalizeFully(application.getName(), new char[] { '_', '-', ' ' }).replaceAll("_", "").replaceAll("_", "").replaceAll("-", "").replaceAll(" ", "");
 
 		// CLIENT LOG FILE APPENDER (ROLLING)
-		RollingRandomAccessFileAppender clientInfoLogFile = RollingRandomAccessFileAppender.createAppender(logFilePrefix + "-0.log", logFilePrefix + "-%i.log", null, "InfoFile", null, null, OnStartupTriggeringPolicy.createPolicy(), DefaultRolloverStrategy.createStrategy("2", "1", "min", null, configuration), logfilePattern, null, null, null, null, configuration);
+		RollingRandomAccessFileAppender clientInfoLogFile = RollingRandomAccessFileAppender.createAppender(logFilePrefix + "-0.log", logFilePrefix + "-%i.log", null, "InfoFile", null, null, OnStartupTriggeringPolicy.createPolicy(), DefaultRolloverStrategy.createStrategy("2", "1", "min", null, null, false, configuration), logfilePattern, null, null, null, null, configuration);
 		clientInfoLogFile.start();
 		configuration.addAppender(clientInfoLogFile);
 		rootLogger.addAppender(clientInfoLogFile, Level.INFO, null);
@@ -61,7 +62,7 @@ public class Logging
 		rootLogger.addAppender(detailLogFile, Level.ALL, null);
 
 		// CONSOLE APPENDER
-		ConsoleAppender console = ConsoleAppender.createAppender(consolePattern, null, "SYSTEM_OUT", "Console", null, null); // must be named "Console" to work correctly
+		ConsoleAppender console = ConsoleAppender.createAppender(consolePattern, null, Target.SYSTEM_OUT, "Console", false, true); // must be named "Console" to work correctly
 		console.start();
 		configuration.addAppender(console);
 		rootLogger.addAppender(console, Level.INFO, null);
