@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.http.HttpGenerator;
 import org.eclipse.jetty.server.NCSARequestLog;
@@ -179,9 +180,10 @@ public class NapBot extends Application
 		// update nap god's schedule
 		//=================================
 		{
-			PreparedStatement ps = NapBot.connection.prepareStatement("INSERT OR REPLACE INTO napcharts (id, link) VALUES (?, ?)");
+			PreparedStatement ps = NapBot.connection.prepareStatement("INSERT OR REPLACE INTO napcharts (id, link, time) VALUES (?, ?, ?)");
 			ps.setLong(1, jda.getSelfUser().getIdLong());
 			ps.setString(2, "https://napchart.com/hu3xo");
+			ps.setTimestamp(3, new Timestamp(1494835930000L));
 			ps.executeUpdate();
 		}
 
