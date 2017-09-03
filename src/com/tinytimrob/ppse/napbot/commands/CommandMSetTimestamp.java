@@ -1,9 +1,9 @@
 package com.tinytimrob.ppse.napbot.commands;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import com.tinytimrob.common.CommonUtils;
 import com.tinytimrob.ppse.napbot.CommonPolyStuff;
 import com.tinytimrob.ppse.napbot.NapBot;
 import net.dv8tion.jda.core.entities.Member;
@@ -45,8 +45,7 @@ public class CommandMSetTimestamp implements ICommand
 
 		try
 		{
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-			Date parsedDate = dateFormat.parse(timestring);
+			Date parsedDate = CommonUtils.dateFormatter.parse(timestring);
 
 			// Fucks with SQLite formatting.. I don't think we have any users that old anyway!
 			if (parsedDate.getTime() < 0)
@@ -54,9 +53,9 @@ public class CommandMSetTimestamp implements ICommand
 				throw new Exception();
 			}
 
-			timestamp = new java.sql.Timestamp(parsedDate.getTime());
+			timestamp = new Timestamp(parsedDate.getTime());
 		}
-		catch (Exception e)
+		catch (Throwable t)
 		{
 			channel.sendMessage(moderator.getAsMention() + " Bad timestamp: " + timestring).complete();
 			return true;
@@ -72,7 +71,7 @@ public class CommandMSetTimestamp implements ICommand
 	@Override
 	public String getCommandHelpUsage()
 	{
-		return "msettimestamp [username] [timestamp, e.g. 2017-08-30 20:06:58]";
+		return "msettimestamp [username] [YYYY-MM-DD HH:MM:SS]";
 	}
 
 	@Override

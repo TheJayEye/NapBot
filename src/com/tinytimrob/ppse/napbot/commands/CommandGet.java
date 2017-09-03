@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
+import com.tinytimrob.common.CommonUtils;
 import com.tinytimrob.ppse.napbot.NapBot;
 import com.tinytimrob.ppse.napbot.NapchartHandler;
 import net.dv8tion.jda.core.MessageBuilder;
@@ -141,8 +141,7 @@ public class CommandGet implements ICommand
 			b.append("Napchart for **" + matchedMember.getEffectiveName().replace("_", "\\_").replace("*", "\\*") + "**");
 			if (napchartTimestamp != null)
 			{
-				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-				b.append(" (since " + formatter.format(napchartTimestamp) + " UTC)");
+				b.append(" (since " + CommonUtils.convertTimestamp(napchartTimestamp.getTime()) + " UTC)");
 			}
 			b.append(":");
 			MessageEmbedImpl embedimpl = new MessageEmbedImpl();

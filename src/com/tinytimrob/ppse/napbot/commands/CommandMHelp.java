@@ -32,6 +32,7 @@ public class CommandMHelp implements ICommand
 		output.add("**To make the Nap God say something:** `" + NapBot.CONFIGURATION.messagePrefix + "say [message]`");
 		output.add("**To set someone's schedule and napchart:** `" + NapBot.CONFIGURATION.messagePrefix + "mset [schedule-name] [napchart-link] [username]`. Only the standard schedules are supported. Use `none` in place of the napchart link if you want the user not to have a napchart (any existing chart they have will be removed).");
 		output.add("**To set someone's nickname:** `" + NapBot.CONFIGURATION.messagePrefix + "msetnick [username] [new-nickname]`");
+		output.add("**To set napchart timestamp:** `" + NapBot.CONFIGURATION.messagePrefix + "msettimestamp [username] [YYYY-MM-DD HH:MM:SS]`");
 		output.add("");
 		output.add("**Example advanced usage:** To set 'Boris' on the schedule 'DC1 modified' you must first put them on DC1 and then correct their nickname, like so:");
 		output.add("`" + NapBot.CONFIGURATION.messagePrefix + "mset DC1 https://napchart.com/48iu8 Boris`");

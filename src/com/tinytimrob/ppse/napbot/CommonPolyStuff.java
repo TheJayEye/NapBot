@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import org.apache.commons.lang3.StringUtils;
@@ -24,7 +23,7 @@ public class CommonPolyStuff
 		PreparedStatement ps = NapBot.connection.prepareStatement("INSERT OR REPLACE INTO napcharts (id, link, time) VALUES (?, ?, ?)");
 		ps.setLong(1, user.getIdLong());
 		ps.setString(2, napchart);
-		ps.setTimestamp(3, new Timestamp((new Date()).getTime()));
+		ps.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
 		ps.executeUpdate();
 		try
 		{
