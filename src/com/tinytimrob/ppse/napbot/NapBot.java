@@ -298,7 +298,7 @@ public class NapBot extends Application
 		int schemaVersion = getSchemaVersion();
 
 		// If you add a new schema version, add a NONBREAKING case statement!
-		// This will let the changing propogate through each version
+		// This will let the changing propagate through each version
 		switch (schemaVersion)
 		{
 		case 0:
