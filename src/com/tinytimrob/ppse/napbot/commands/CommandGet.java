@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import com.tinytimrob.common.CommonUtils;
 import com.tinytimrob.ppse.napbot.NapBot;
+import com.tinytimrob.ppse.napbot.NapBotDb;
 import com.tinytimrob.ppse.napbot.NapchartHandler;
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.Member;
@@ -121,7 +122,7 @@ public class CommandGet implements ICommand
 			throw new NullPointerException("Matched member was null");
 		}
 
-		PreparedStatement ps = NapBot.connection.prepareStatement("SELECT * FROM napcharts WHERE id = ? LIMIT 1");
+		PreparedStatement ps = NapBotDb.prepare("SELECT * FROM napcharts WHERE id = ? LIMIT 1");
 		ps.setLong(1, matchedMember.getUser().getIdLong());
 		ResultSet rs = ps.executeQuery();
 		if (rs.next())
@@ -142,7 +143,7 @@ public class CommandGet implements ICommand
 			b.append("Napchart for **" + matchedMember.getEffectiveName().replace("_", "\\_").replace("*", "\\*") + "**");
 			if (napchartTimestamp != null)
 			{
-				b.append(" (since " + CommonUtils.convertTimestamp(napchartTimestamp.getTime()) + " UTC)");
+				b.append(" (since " + CommonUtils.convertTimestamp(napchartTimestamp) + " UTC)");
 			}
 			b.append(":");
 			MessageEmbedImpl embedimpl = new MessageEmbedImpl();

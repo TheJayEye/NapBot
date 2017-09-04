@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import com.tinytimrob.ppse.napbot.CommonPolyStuff;
-import com.tinytimrob.ppse.napbot.NapBot;
+import com.tinytimrob.ppse.napbot.NapBotDb;
 import com.tinytimrob.ppse.napbot.NapSchedule;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
@@ -37,7 +37,7 @@ public class CommandChartList implements ICommand
 			hm.put(s, new ArrayList<String>());
 		}
 		int chartcount = 0;
-		PreparedStatement ps = NapBot.connection.prepareStatement("SELECT * FROM napcharts");
+		PreparedStatement ps = NapBotDb.prepare("SELECT * FROM napcharts");
 		ResultSet rs = ps.executeQuery();
 		while (rs.next())
 		{

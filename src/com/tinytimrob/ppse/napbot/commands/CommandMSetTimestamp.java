@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import com.tinytimrob.common.CommonUtils;
 import com.tinytimrob.ppse.napbot.CommonPolyStuff;
+import com.tinytimrob.ppse.napbot.NapBotDb;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -61,7 +62,7 @@ public class CommandMSetTimestamp implements ICommand
 		}
 
 		User user = matchedMember.getUser();
-		CommonPolyStuff.setNapchartTimestamp(user, timestamp);
+		NapBotDb.setNapchartTimestamp(user, timestamp);
 
 		channel.sendMessage(moderator.getAsMention() + " The sleep schedule timestamp for **" + matchedMember.getEffectiveName() + "** has been set to " + timestamp).complete();
 		return true;

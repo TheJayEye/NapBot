@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.tuple.Pair;
 import com.tinytimrob.ppse.napbot.CommonPolyStuff;
 import com.tinytimrob.ppse.napbot.NapBot;
+import com.tinytimrob.ppse.napbot.NapBotDb;
 import com.tinytimrob.ppse.napbot.NapSchedule;
 import com.tinytimrob.ppse.napbot.NapScheduleVariant;
 import net.dv8tion.jda.core.entities.Member;
@@ -80,7 +81,7 @@ public class CommandMSet implements ICommand
 
 				if (napchart.equals("none"))
 				{
-					String ret = CommonPolyStuff.removeNapchart(user, channel);
+					String ret = NapBotDb.removeNapchart(user, channel);
 					if (ret.isEmpty())
 					{
 						channel.sendMessage(moderator.getAsMention() + " The sleep schedule for **" + matchedMember.getEffectiveName() + "** has been set to " + sstr + ".").complete();
@@ -92,7 +93,7 @@ public class CommandMSet implements ICommand
 				}
 				else
 				{
-					CommonPolyStuff.setNapchart(user, channel, napchart);
+					NapBotDb.setNapchart(user, napchart);
 					channel.sendMessage(moderator.getAsMention() + " The sleep schedule for **" + matchedMember.getEffectiveName() + "** has been set to " + sstr + " and their napchart has been saved.").complete();
 				}
 			}

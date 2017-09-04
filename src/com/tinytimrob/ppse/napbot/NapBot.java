@@ -1,12 +1,6 @@
 package com.tinytimrob.ppse.napbot;
 
 import java.io.File;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.http.HttpGenerator;
@@ -58,9 +52,6 @@ public class NapBot extends Application
 
 	/** Whether or not the bot should shut down */
 	static volatile TerminationReason terminationReason = null;
-
-	/** Database connecton */
-	public static Connection connection = null;
 
 	/** Discord Resync ID */
 	public static final int RESYNC_ID = 1;
@@ -133,7 +124,7 @@ public class NapBot extends Application
 		//=================================
 		// Connect to database
 		//=================================
-		initializeDatabase();
+		NapBotDb.initialize();
 
 		//=================================
 		// Connect to Firefox
@@ -181,13 +172,7 @@ public class NapBot extends Application
 		//=================================
 		// update nap god's schedule
 		//=================================
-		{
-			PreparedStatement ps = NapBot.connection.prepareStatement("INSERT OR REPLACE INTO napcharts (id, link, time) VALUES (?, ?, ?)");
-			ps.setLong(1, jda.getSelfUser().getIdLong());
-			ps.setString(2, "https://napchart.com/hu3xo");
-			ps.setTimestamp(3, new Timestamp(1494835930000L));
-			ps.executeUpdate();
-		}
+		NapBotDb.setNapchart(jda.getSelfUser(), "https://napchart.com/hu3xo", new Timestamp(1494835930000L));
 
 		//=================================
 		// Wait for shutdown
@@ -219,87 +204,5 @@ public class NapBot extends Application
 			SERVER.stop();
 		}
 		NapchartHandler.shutdown();
-	}
-
-	private static boolean tableExists(String name) throws SQLException
-	{
-		PreparedStatement exists = connection.prepareStatement("SELECT name FROM sqlite_master WHERE type = 'table' AND name=?");
-		try
-		{
-			exists.setString(1, name);
-			return exists.executeQuery().next();
-		}
-		finally
-		{
-			exists.close();
-		}
-	}
-
-	private static int getSchemaVersion() throws SQLException
-	{
-		if (!tableExists("meta"))
-		{
-			Statement vc = connection.createStatement();
-			vc.executeUpdate("CREATE TABLE meta (version INTEGER DEFAULT 0)");
-			vc.executeUpdate("INSERT INTO meta (version) VALUES (0)");
-			vc.close();
-			// Version 0 means a version before we tracked the version
-			return 0;
-		}
-
-		Statement vq = connection.createStatement();
-		try
-		{
-			ResultSet vqResult = vq.executeQuery("SELECT version FROM meta");
-			// Guaranteed to exist at this point
-			vqResult.next();
-			log.debug(vqResult);
-			return vqResult.getInt("version");
-		}
-		finally
-		{
-			vq.close();
-		}
-	}
-
-	private static void setSchemaVersion(int version) throws SQLException
-	{
-		PreparedStatement sq = connection.prepareStatement("UPDATE meta SET version = ?");
-		sq.setLong(1, version);
-		sq.executeUpdate();
-		sq.close();
-	}
-
-	private static void initializeDatabase() throws SQLException
-	{
-		connection = DriverManager.getConnection("jdbc:sqlite:napbot.db");
-
-		int schemaVersion = getSchemaVersion();
-
-		// If you add a new schema version, add a NONBREAKING case statement!
-		// This will let the changing propagate through each version
-		switch (schemaVersion)
-		{
-		case 0:
-			log.debug("Updating to db version 1");
-			if (tableExists("napcharts"))
-			{
-				String q = "ALTER TABLE napcharts ADD COLUMN time TIMESTAMP";
-				Statement ncs = connection.createStatement();
-				ncs.executeUpdate(q);
-				ncs.close();
-			}
-			else
-			{
-				String q = "CREATE TABLE IF NOT EXISTS " + "napcharts (id TEXT PRIMARY KEY NOT NULL, " + "link TEXT, " + "time TIMESTAMP)";
-				Statement ncs = connection.createStatement();
-				ncs.executeUpdate(q);
-				ncs.close();
-			}
-			// nobreak
-		}
-
-		// This should be 1 greater than the last case statement index
-		setSchemaVersion(1);
 	}
 }

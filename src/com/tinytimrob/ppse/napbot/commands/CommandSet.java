@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.tuple.Pair;
 import com.tinytimrob.ppse.napbot.CommonPolyStuff;
 import com.tinytimrob.ppse.napbot.NapBot;
+import com.tinytimrob.ppse.napbot.NapBotDb;
 import com.tinytimrob.ppse.napbot.NapSchedule;
 import com.tinytimrob.ppse.napbot.NapScheduleVariant;
 import net.dv8tion.jda.core.entities.Message;
@@ -36,7 +37,7 @@ public class CommandSet implements ICommand
 			String param = parameters.get(0);
 			if (param.equals("none"))
 			{
-				String text = CommonPolyStuff.removeNapchart(user, channel);
+				String text = NapBotDb.removeNapchart(user, channel);
 				if (!text.isEmpty())
 				{
 					channel.sendMessage(user.getAsMention() + " Your napchart has been removed.").complete();
@@ -48,7 +49,7 @@ public class CommandSet implements ICommand
 			}
 			else if (this.NAPCHART_PATTERN.matcher(param).matches())
 			{
-				CommonPolyStuff.setNapchart(user, channel, param);
+				NapBotDb.setNapchart(user, param);
 				channel.sendMessage(user.getAsMention() + " Your napchart has been saved.").complete();
 			}
 			else
@@ -68,7 +69,7 @@ public class CommandSet implements ICommand
 					{
 						sstr += "-" + variant.name().toLowerCase(Locale.ENGLISH);
 					}
-					String rnc = CommonPolyStuff.removeNapchart(user, channel);
+					String rnc = NapBotDb.removeNapchart(user, channel);
 					channel.sendMessage(user.getAsMention() + " Your sleep schedule has been set to " + sstr + "." + rnc).complete();
 				}
 			}
@@ -103,7 +104,7 @@ public class CommandSet implements ICommand
 
 					if (napchart.equals("none"))
 					{
-						String ret = CommonPolyStuff.removeNapchart(user, channel);
+						String ret = NapBotDb.removeNapchart(user, channel);
 						if (ret.isEmpty())
 						{
 							channel.sendMessage(user.getAsMention() + " Your sleep schedule has been set to " + sstr + ".").complete();
@@ -115,7 +116,7 @@ public class CommandSet implements ICommand
 					}
 					else
 					{
-						CommonPolyStuff.setNapchart(user, channel, napchart);
+						NapBotDb.setNapchart(user, napchart);
 						channel.sendMessage(user.getAsMention() + " Your sleep schedule has been set to " + sstr + " and your napchart has been saved.").complete();
 					}
 				}

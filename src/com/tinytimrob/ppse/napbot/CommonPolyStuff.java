@@ -1,10 +1,5 @@
 package com.tinytimrob.ppse.napbot;
 
-import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -21,48 +16,6 @@ public class CommonPolyStuff
 	public static boolean isUserModerator(User user)
 	{
 		return user.getId().equals("147356941860077568") || NapBot.CONFIGURATION.moderators.contains(user.getId());
-	}
-
-	public static void setNapchart(User user, TextChannel channel, String napchart) throws SQLException
-	{
-		napchart = napchart.replace("http://", "https://");
-		PreparedStatement ps = NapBot.connection.prepareStatement("INSERT OR REPLACE INTO napcharts (id, link, time) VALUES (?, ?, ?)");
-		ps.setLong(1, user.getIdLong());
-		ps.setString(2, napchart);
-		ps.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-		ps.executeUpdate();
-		try
-		{
-			NapchartHandler.getNapchart(napchart.substring(napchart.length() - 5, napchart.length()));
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public static void setNapchartTimestamp(User user, Timestamp timestamp) throws SQLException
-	{
-		PreparedStatement ps = NapBot.connection.prepareStatement("UPDATE napcharts SET time = ? WHERE id = ?");
-		ps.setTimestamp(1, timestamp);
-		ps.setLong(2, user.getIdLong());
-		ps.executeUpdate();
-	}
-
-	public static String removeNapchart(User user, TextChannel channel) throws SQLException
-	{
-		PreparedStatement ps = NapBot.connection.prepareStatement("SELECT * FROM napcharts WHERE id = ? LIMIT 1");
-		ps.setLong(1, user.getIdLong());
-		ResultSet rs = ps.executeQuery();
-		if (rs.next())
-		{
-			String napchartLocation = rs.getString("link").replace("http://", "https://");
-			ps = NapBot.connection.prepareStatement("DELETE FROM napcharts WHERE id = ?");
-			ps.setLong(1, user.getIdLong());
-			ps.executeUpdate();
-			return "\n**Attention:** Your old napchart (<" + napchartLocation + ">) was removed. If you wanted to keep it, type `" + NapBot.CONFIGURATION.messagePrefix + "set " + napchartLocation + "` to set it against your name again.";
-		}
-		return "";
 	}
 
 	public static Pair<NapSchedule, NapScheduleVariant> setSchedule(User user, TextChannel channel, String scheduleString)

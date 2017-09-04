@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -77,6 +78,16 @@ public class CommonUtils
 	public static String convertTimestamp(long timestamp)
 	{
 		return dateFormatter.format(new Date(timestamp));
+	}
+
+	/** 
+	 * Converts database timestamp to human readable format 
+	 * @param timestamp The timestamp to convert
+	 * @return A human readable version of the timestamp
+	 */
+	public static String convertTimestamp(Timestamp timestamp)
+	{
+		return dateFormatter.format(timestamp);
 	}
 
 	/**
