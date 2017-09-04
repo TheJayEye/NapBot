@@ -64,7 +64,7 @@ public class CommandMSetTimestamp implements ICommand
 		User user = matchedMember.getUser();
 		NapBotDb.setNapchartTimestamp(user, timestamp);
 
-		channel.sendMessage(moderator.getAsMention() + " The sleep schedule timestamp for **" + matchedMember.getEffectiveName() + "** has been set to " + timestamp).complete();
+		channel.sendMessage(moderator.getAsMention() + " The sleep schedule timestamp for **" + matchedMember.getEffectiveName() + "** has been set to " + CommonUtils.convertTimestamp(timestamp) + " UTC.").complete();
 		return true;
 	}
 
