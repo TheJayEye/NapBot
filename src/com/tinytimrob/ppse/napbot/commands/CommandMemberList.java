@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
-import com.tinytimrob.ppse.napbot.NapBot;
+import com.tinytimrob.ppse.napbot.CommonPolyStuff;
 import com.tinytimrob.ppse.napbot.NapSchedule;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
@@ -53,7 +53,7 @@ public class CommandMemberList implements ICommand
 			if (!m.getUser().isBot())
 			{
 				String en = m.getEffectiveName();
-				NapSchedule s = NapBot.determineScheduleFromMemberName(en);
+				NapSchedule s = CommonPolyStuff.determineScheduleFromMemberName(en);
 				ArrayList<String> l = hm.get(s);
 				String suf = " [" + s.name + "]";
 				if (en.endsWith(suf))

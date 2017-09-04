@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
+import com.tinytimrob.ppse.napbot.CommonPolyStuff;
 import com.tinytimrob.ppse.napbot.NapBot;
 import com.tinytimrob.ppse.napbot.NapSchedule;
 import net.dv8tion.jda.core.entities.Member;
@@ -44,7 +45,7 @@ public class CommandChartList implements ICommand
 			if (member != null)
 			{
 				String en = member.getEffectiveName();
-				NapSchedule s = NapBot.determineScheduleFromMemberName(en);
+				NapSchedule s = CommonPolyStuff.determineScheduleFromMemberName(en);
 				if (s != null)
 				{
 					ArrayList<String> l = hm.get(s);

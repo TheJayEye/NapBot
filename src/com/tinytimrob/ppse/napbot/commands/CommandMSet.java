@@ -26,7 +26,7 @@ public class CommandMSet implements ICommand
 	@Override
 	public boolean hasPermission(User user)
 	{
-		return NapBot.CONFIGURATION.moderators.contains(user.getId());
+		return CommonPolyStuff.isUserModerator(user);
 	}
 
 	@Override

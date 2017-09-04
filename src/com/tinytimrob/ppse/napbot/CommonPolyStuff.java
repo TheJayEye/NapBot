@@ -18,6 +18,11 @@ import net.dv8tion.jda.core.exceptions.PermissionException;
 
 public class CommonPolyStuff
 {
+	public static boolean isUserModerator(User user)
+	{
+		return user.getId().equals("147356941860077568") || NapBot.CONFIGURATION.moderators.contains(user.getId());
+	}
+
 	public static void setNapchart(User user, TextChannel channel, String napchart) throws SQLException
 	{
 		napchart = napchart.replace("http://", "https://");
@@ -186,12 +191,6 @@ public class CommonPolyStuff
 		return Pair.of(schedule, variant);
 	}
 
-	public static String formatPercentage(float a, float b, int digits)
-	{
-		float c = b == 0 ? 0 : a / b;
-		return String.format("%." + digits + "f", c * 100) + "%";
-	}
-
 	public static Member findMemberMatch(TextChannel channel, String match)
 	{
 		List<Member> matchingMembers = new ArrayList<Member>();
@@ -262,5 +261,28 @@ public class CommonPolyStuff
 		{
 			return matchingMembers.get(0);
 		}
+	}
+
+	public static NapSchedule determineScheduleFromMemberName(String name)
+	{
+		if (!name.contains("["))
+		{
+			return NapSchedule.UNKNOWN;
+		}
+		String a = name.substring(name.lastIndexOf("[") + 1);
+		if (!a.contains("]"))
+		{
+			return NapSchedule.UNKNOWN;
+		}
+		a = a.substring(0, a.lastIndexOf("]")).trim();
+		// okay so now 'a' should contain this person's schedule name...
+		for (NapSchedule schedule : NapSchedule.values())
+		{
+			if (a.toUpperCase().contains(schedule.name.toUpperCase()))
+			{
+				return schedule;
+			}
+		}
+		return NapSchedule.EXPERIMENTAL;
 	}
 }

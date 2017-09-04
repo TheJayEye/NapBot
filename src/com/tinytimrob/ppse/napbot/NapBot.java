@@ -37,6 +37,7 @@ import com.tinytimrob.ppse.napbot.commands.CommandMemberList;
 import com.tinytimrob.ppse.napbot.commands.CommandSay;
 import com.tinytimrob.ppse.napbot.commands.CommandScheduleCount;
 import com.tinytimrob.ppse.napbot.commands.CommandSet;
+import com.tinytimrob.ppse.napbot.commands.CommandXHistoryDump;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -127,6 +128,7 @@ public class NapBot extends Application
 		NapBotListener.register(new CommandMSetTimestamp());
 		NapBotListener.register(new CommandScheduleCount());
 		NapBotListener.register(new CommandAdaptedList());
+		NapBotListener.register(new CommandXHistoryDump());
 
 		//=================================
 		// Connect to database
@@ -217,29 +219,6 @@ public class NapBot extends Application
 			SERVER.stop();
 		}
 		NapchartHandler.shutdown();
-	}
-
-	public static NapSchedule determineScheduleFromMemberName(String name)
-	{
-		if (!name.contains("["))
-		{
-			return NapSchedule.UNKNOWN;
-		}
-		String a = name.substring(name.lastIndexOf("[") + 1);
-		if (!a.contains("]"))
-		{
-			return NapSchedule.UNKNOWN;
-		}
-		a = a.substring(0, a.lastIndexOf("]")).trim();
-		// okay so now 'a' should contain this person's schedule name...
-		for (NapSchedule schedule : NapSchedule.values())
-		{
-			if (a.toUpperCase().contains(schedule.name.toUpperCase()))
-			{
-				return schedule;
-			}
-		}
-		return NapSchedule.EXPERIMENTAL;
 	}
 
 	private static boolean tableExists(String name) throws SQLException

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
-import com.tinytimrob.ppse.napbot.CommonPolyStuff;
+import com.tinytimrob.common.CommonUtils;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.Role;
@@ -61,7 +61,7 @@ public class CommandAdaptedList implements ICommand
 			}
 		}
 		Collections.sort(strings, String.CASE_INSENSITIVE_ORDER);
-		String currentMessage = "There are **" + strings.size() + "** members on this server (" + CommonPolyStuff.formatPercentage(strings.size(), membercount, 2) + ") who have adapted to at least one schedule:\n" + StringUtils.join(strings, ", ");
+		String currentMessage = "There are **" + strings.size() + "** members on this server (" + CommonUtils.formatPercentage(strings.size(), membercount, 2) + ") who have adapted to at least one schedule:\n" + StringUtils.join(strings, ", ");
 		channel.sendMessage(currentMessage).complete();
 		return true;
 	}

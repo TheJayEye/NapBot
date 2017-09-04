@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
+import com.tinytimrob.common.CommonUtils;
 import com.tinytimrob.ppse.napbot.CommonPolyStuff;
 import com.tinytimrob.ppse.napbot.NapBot;
 import com.tinytimrob.ppse.napbot.NapSchedule;
@@ -82,7 +83,7 @@ public class CommandAboutSchedule implements ICommand
 				membercount++;
 
 				String en = m.getEffectiveName();
-				NapSchedule s = NapBot.determineScheduleFromMemberName(en);
+				NapSchedule s = CommonPolyStuff.determineScheduleFromMemberName(en);
 				// is this the user's current schedule?
 				if (s == this.schedule)
 				{
@@ -115,7 +116,7 @@ public class CommandAboutSchedule implements ICommand
 			}
 		}
 		Collections.sort(l, String.CASE_INSENSITIVE_ORDER);
-		String msg = (l.size() == 1 ? "is **1 member**" : l.size() == 0 ? "are **no members**" : "are **" + l.size() + " members**" + " (" + CommonPolyStuff.formatPercentage(l.size(), membercount, 2) + ")");
+		String msg = (l.size() == 1 ? "is **1 member**" : l.size() == 0 ? "are **no members**" : "are **" + l.size() + " members**" + " (" + CommonUtils.formatPercentage(l.size(), membercount, 2) + ")");
 		String currentMessage = "SCHEDULE STATISTICS:\n\nThere " + msg + " currently on the schedule " + this.schedule.name;
 		if (!l.isEmpty())
 		{
@@ -127,7 +128,7 @@ public class CommandAboutSchedule implements ICommand
 		}
 		if (this.schedule != NapSchedule.MONO)
 		{
-			currentMessage = currentMessage + "\n\n**Attempted:** " + attemptedcount + " / " + membercount + " (" + CommonPolyStuff.formatPercentage(attemptedcount, membercount, 2) + " of members)\n**Adapted:** " + adaptedcount + " / " + membercount + " (" + CommonPolyStuff.formatPercentage(adaptedcount, membercount, 2) + " of members, " + CommonPolyStuff.formatPercentage(adaptedcount, attemptedcount, 2) + " of those who attempted the schedule)";
+			currentMessage = currentMessage + "\n\n**Attempted:** " + attemptedcount + " / " + membercount + " (" + CommonUtils.formatPercentage(attemptedcount, membercount, 2) + " of members)\n**Adapted:** " + adaptedcount + " / " + membercount + " (" + CommonUtils.formatPercentage(adaptedcount, membercount, 2) + " of members, " + CommonUtils.formatPercentage(adaptedcount, attemptedcount, 2) + " of those who attempted the schedule)";
 		}
 		channel.sendMessage(currentMessage).complete();
 		return true;

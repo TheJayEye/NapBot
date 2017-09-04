@@ -2,7 +2,7 @@ package com.tinytimrob.ppse.napbot.commands;
 
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
-import com.tinytimrob.ppse.napbot.NapBot;
+import com.tinytimrob.ppse.napbot.CommonPolyStuff;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
@@ -18,7 +18,7 @@ public class CommandSay implements ICommand
 	@Override
 	public boolean hasPermission(User user)
 	{
-		return NapBot.CONFIGURATION.moderators.contains(user.getId());
+		return CommonPolyStuff.isUserModerator(user);
 	}
 
 	@Override

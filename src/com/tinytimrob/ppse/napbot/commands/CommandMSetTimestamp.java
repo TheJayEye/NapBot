@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 import com.tinytimrob.common.CommonUtils;
 import com.tinytimrob.ppse.napbot.CommonPolyStuff;
-import com.tinytimrob.ppse.napbot.NapBot;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -22,7 +21,7 @@ public class CommandMSetTimestamp implements ICommand
 	@Override
 	public boolean hasPermission(User user)
 	{
-		return NapBot.CONFIGURATION.moderators.contains(user.getId());
+		return CommonPolyStuff.isUserModerator(user);
 	}
 
 	@Override

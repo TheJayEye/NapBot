@@ -78,4 +78,17 @@ public class CommonUtils
 	{
 		return dateFormatter.format(new Date(timestamp));
 	}
+
+	/**
+	 * Format a percentage
+	 * @param a Numerator
+	 * @param b Denominator
+	 * @param digits How many digits after the decimal point to return
+	 * @return The formatted percentage
+	 */
+	public static String formatPercentage(float a, float b, int digits)
+	{
+		float c = b == 0 ? 0 : a / b;
+		return String.format("%." + digits + "f", c * 100) + "%";
+	}
 }
