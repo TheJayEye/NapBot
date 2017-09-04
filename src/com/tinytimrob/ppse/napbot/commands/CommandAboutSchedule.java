@@ -29,6 +29,10 @@ public class CommandAboutSchedule implements ICommand
 	@Override
 	public String[] getCommandName()
 	{
+		if (this.schedule == NapSchedule.MONO)
+		{
+			return new String[] { "Mono", "Monophasic" };
+		}
 		return new String[] { this.schedule.name };
 	}
 

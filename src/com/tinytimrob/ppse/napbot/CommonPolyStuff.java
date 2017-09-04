@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -59,7 +60,7 @@ public class CommonPolyStuff
 		return "";
 	}
 
-	public static NapSchedule setSchedule(User user, TextChannel channel, String scheduleString)
+	public static Pair<NapSchedule, NapScheduleVariant> setSchedule(User user, TextChannel channel, String scheduleString)
 	{
 		String scheduleString_ = scheduleString.toLowerCase(Locale.ENGLISH);
 		NapSchedule schedule = null;
@@ -98,6 +99,15 @@ public class CommonPolyStuff
 			{
 			case "monophasic":
 				schedule = NapSchedule.MONO;
+				break;
+			case "quad":
+				schedule = NapSchedule.QUADPHASIC;
+				break;
+			case "tri":
+				schedule = NapSchedule.TRIPHASIC;
+				break;
+			case "bi":
+				schedule = NapSchedule.BIPHASIC;
 				break;
 			case "tricore":
 			case "tri-core":
@@ -173,7 +183,7 @@ public class CommonPolyStuff
 			// no permission to set nickname, FGS
 			e.printStackTrace();
 		}
-		return schedule;
+		return Pair.of(schedule, variant);
 	}
 
 	public static String formatPercentage(float a, float b, int digits)

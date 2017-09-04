@@ -234,7 +234,7 @@ public enum NapSchedule
 			"", //
 			"", //
 			""), //
-	MONO("Mono", "Mono", NapRole.MONOPHASIC,//
+	MONO("Mono", "Monophasic", NapRole.MONOPHASIC,//
 			"q6fkh", //
 			"Around 8 hours", //
 			"Unidentified in polyphasic world", //
