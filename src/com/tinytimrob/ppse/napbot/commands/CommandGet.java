@@ -136,6 +136,7 @@ public class CommandGet implements ICommand
 			catch (IOException e)
 			{
 				// yay.
+				e.printStackTrace();
 			}
 			MessageBuilder b = new MessageBuilder();
 			b.append("Napchart for **" + matchedMember.getEffectiveName().replace("_", "\\_").replace("*", "\\*") + "**");

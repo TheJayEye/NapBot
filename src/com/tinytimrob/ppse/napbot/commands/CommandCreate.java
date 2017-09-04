@@ -190,6 +190,7 @@ public class CommandCreate implements ICommand
 		catch (IOException e)
 		{
 			// yay.
+			e.printStackTrace();
 		}
 		MessageBuilder b = new MessageBuilder();
 		MessageEmbedImpl embedimpl = new MessageEmbedImpl();
