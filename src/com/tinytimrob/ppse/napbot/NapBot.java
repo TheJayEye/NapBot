@@ -86,7 +86,7 @@ public class NapBot extends Application
 	@Override
 	protected String getVersion()
 	{
-		return "0.0.3";
+		return "0.0.4";
 	}
 
 	/** The currently loaded configuration data */
