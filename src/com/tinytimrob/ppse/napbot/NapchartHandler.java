@@ -55,7 +55,7 @@ public class NapchartHandler
 			}
 			catch (Throwable t)
 			{
-				throw new IOException("Failed to download image from napchart.com");
+				throw new IOException("Failed to download image from napchart.com", t);
 			}
 		}
 		return f;
