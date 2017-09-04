@@ -49,7 +49,7 @@ public class CommandXHistoryDump implements ICommand
 		{
 			if (m.getRawContent().startsWith("+set ") || m.getRawContent().startsWith("+mset "))
 			{
-				System.out.println(m.getAuthor().getName() + " >> " + m.getCreationTime().toEpochSecond() + " >> " + m.getContent());
+				System.out.println(m.getCreationTime().toEpochSecond() + " " + m.getAuthor().getId() + " " + m.getAuthor().getName() + " >> " + m.getContent());
 			}
 		}
 		channel.sendMessage("history dump complete").complete();
