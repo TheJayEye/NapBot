@@ -35,8 +35,7 @@ import com.tinytimrob.ppse.napbot.commands.CommandXHistoryDump;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
-import net.dv8tion.jda.core.entities.Game.GameType;
-import net.dv8tion.jda.core.entities.impl.GameImpl;
+import net.dv8tion.jda.core.entities.Game;
 
 /**
  * NapBot
@@ -165,7 +164,7 @@ public class NapBot extends Application
 		// Connect to Discord
 		//=================================
 		jda = new JDABuilder(AccountType.BOT).setToken(CONFIGURATION.authToken).buildBlocking();
-		jda.getPresence().setGame(new GameImpl("Type " + NapBot.CONFIGURATION.messagePrefix + "help", null, GameType.DEFAULT));
+		jda.getPresence().setGame(Game.of("Type " + NapBot.CONFIGURATION.messagePrefix + "help"));
 		//		jda.getSelfUser().getManager().setName(this.getName()).complete();
 		jda.addEventListener(new NapBotListener());
 
