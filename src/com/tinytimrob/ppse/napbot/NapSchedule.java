@@ -23,7 +23,7 @@ public enum NapSchedule
 			"Rather high, most popular of Dual Core sleep.", //
 			""), //
 	DC2("DC2", "Dual Core 2", NapRole.DUAL_CORE,//
-			"h58rh", //
+			"rxpjl", //
 			"4 hours 40 minutes", //
 			"Dual Core sleep", //
 			"2 core sleeps, 2 naps", //
