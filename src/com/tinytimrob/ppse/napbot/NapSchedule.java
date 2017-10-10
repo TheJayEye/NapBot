@@ -13,7 +13,7 @@ public enum NapSchedule
 			"Most commonly used", //
 			""), //
 	DC1("DC1", "Dual Core 1", NapRole.DUAL_CORE,//
-			"mf93j", //
+			"ugn4g", //
 			"5 hours 20 minutes", //
 			"Dual Core sleep", //
 			"2 core sleeps, 1 nap", //
