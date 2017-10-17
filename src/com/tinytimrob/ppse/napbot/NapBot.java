@@ -18,7 +18,6 @@ import com.tinytimrob.common.LogWrapper;
 import com.tinytimrob.common.PlatformData;
 import com.tinytimrob.common.TerminationReason;
 import com.tinytimrob.ppse.napbot.commands.CommandAboutSchedule;
-import com.tinytimrob.ppse.napbot.commands.CommandAdaptedList;
 import com.tinytimrob.ppse.napbot.commands.CommandChartList;
 import com.tinytimrob.ppse.napbot.commands.CommandCreate;
 import com.tinytimrob.ppse.napbot.commands.CommandGet;
@@ -117,7 +116,6 @@ public class NapBot extends Application
 		NapBotListener.register(new CommandMSetNick());
 		NapBotListener.register(new CommandMSetTimestamp());
 		NapBotListener.register(new CommandScheduleCount());
-		NapBotListener.register(new CommandAdaptedList());
 		NapBotListener.register(new CommandXHistoryDump());
 
 		//=================================

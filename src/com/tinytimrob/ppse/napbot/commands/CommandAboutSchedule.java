@@ -43,6 +43,11 @@ public class CommandAboutSchedule implements ICommand
 		return true;
 	}
 
+	private String pluralize(int value, String none, String singular_pr, String singular_ps, String plural_pr, String plural_ps)
+	{
+		return value == 0 ? none : value == 1 ? singular_pr + value + singular_ps : plural_pr + value + plural_ps;
+	}
+
 	@Override
 	public boolean execute(User user, TextChannel channel, String command, List<String> parameters, Message message) throws Exception
 	{
@@ -70,9 +75,9 @@ public class CommandAboutSchedule implements ICommand
 		embedimpl.setFields(new ArrayList<MessageEmbed.Field>());
 		b.setEmbed(embedimpl);
 		channel.sendMessage(b.build()).complete();
-		ArrayList<String> l = new ArrayList<String>();
+		ArrayList<String> people_on_schedule = new ArrayList<String>();
+		ArrayList<String> people_adapted = new ArrayList<String>();
 		List<Member> mlist = channel.getGuild().getMembers();
-		String suf = " [" + this.schedule.name + "]";
 		int attemptedcount = 0;
 		int adaptedcount = 0;
 		int membercount = 0;
@@ -84,6 +89,7 @@ public class CommandAboutSchedule implements ICommand
 
 				String en = m.getEffectiveName();
 				NapSchedule s = CommonPolyStuff.determineScheduleFromMemberName(en);
+				String suf = " [" + s.name + "]";
 				// is this the user's current schedule?
 				if (s == this.schedule)
 				{
@@ -91,7 +97,11 @@ public class CommandAboutSchedule implements ICommand
 					{
 						en = en.substring(0, en.length() - suf.length());
 					}
-					l.add(en.replace("_", "\\_").replace("*", "\\*"));
+					people_on_schedule.add(en.replace("_", "\\_").replace("*", "\\*"));
+				}
+				else if (en.contains(" [") && en.endsWith("]"))
+				{
+					en = en.substring(0, en.lastIndexOf(" ["));
 				}
 				// did this user attempt this schedule in the past?
 				int tagcount = 0;
@@ -104,6 +114,7 @@ public class CommandAboutSchedule implements ICommand
 					}
 					else if (role.getName().equals("Adapted-" + this.schedule.name))
 					{
+						people_adapted.add(en.replace("_", "\\_").replace("*", "\\*"));
 						attemptedcount++;
 						adaptedcount++;
 						tagcount++;
@@ -113,24 +124,48 @@ public class CommandAboutSchedule implements ICommand
 				{
 					attemptedcount--; // this user has both tags. a huge SIGH to whoever mistagged this person
 				}
+				else if (tagcount == 0 && s == this.schedule)
+				{
+					attemptedcount++; // this user has neither tag. a huge SIGH to whoever mistagged this person
+				}
 			}
 		}
-		Collections.sort(l, String.CASE_INSENSITIVE_ORDER);
-		String msg = (l.size() == 1 ? "is **1 member**" : l.size() == 0 ? "are **no members**" : "are **" + l.size() + " members**" + " (" + CommonUtils.formatPercentage(l.size(), membercount, 2) + ")");
-		String currentMessage = "SCHEDULE STATISTICS:\n\nThere " + msg + " currently on the schedule " + this.schedule.name;
-		if (!l.isEmpty())
+		Collections.sort(people_on_schedule, String.CASE_INSENSITIVE_ORDER);
+		Collections.sort(people_adapted, String.CASE_INSENSITIVE_ORDER);
+		StringBuilder builder = new StringBuilder();
+		builder.append("---- Schedule Statistics ----");
+		builder.append("\n\n");
+		if (this.schedule != NapSchedule.MONO)
 		{
-			currentMessage = currentMessage + ":\n" + StringUtils.join(l, ", ");
+			// Determine how many people attempted the schedule and so forth
+			builder.append(this.pluralize(attemptedcount, "**0 members**", "**", " member**", "**", " members**") + " (" + CommonUtils.formatPercentage(attemptedcount, membercount, 2) + ") ");
+			builder.append(attemptedcount == 1 ? "has" : "have");
+			builder.append(" attempted this schedule.\n\n");
 		}
-		else
+		if (!people_on_schedule.isEmpty())
 		{
-			currentMessage = currentMessage + ".";
+			builder.append(this.pluralize(people_on_schedule.size(), "**0 members**", "**", " member**", "**", " members**") + " (" + CommonUtils.formatPercentage(people_on_schedule.size(), membercount, 2) + " of members, " + CommonUtils.formatPercentage(people_on_schedule.size(), attemptedcount, 2) + " of attempted) ");
+			builder.append(people_on_schedule.size() == 1 ? "is" : "are");
+			builder.append(" currently on this schedule");
+			builder.append(people_on_schedule.isEmpty() ? "." : ":\n");
+			if (!people_on_schedule.isEmpty())
+			{
+				builder.append(StringUtils.join(people_on_schedule, ", "));
+			}
+			builder.append("\n\n");
 		}
 		if (this.schedule != NapSchedule.MONO)
 		{
-			currentMessage = currentMessage + "\n\n**Attempted:** " + attemptedcount + " / " + membercount + " (" + CommonUtils.formatPercentage(attemptedcount, membercount, 2) + " of members)\n**Adapted:** " + adaptedcount + " / " + membercount + " (" + CommonUtils.formatPercentage(adaptedcount, membercount, 2) + " of members, " + CommonUtils.formatPercentage(adaptedcount, attemptedcount, 2) + " of those who attempted the schedule)";
+			builder.append(this.pluralize(people_adapted.size(), "**0 members**", "**", " member**", "**", " members**") + " (" + CommonUtils.formatPercentage(people_adapted.size(), membercount, 2) + " of members, " + CommonUtils.formatPercentage(people_adapted.size(), attemptedcount, 2) + " of attempted) ");
+			builder.append(people_adapted.size() == 1 ? "has" : "have");
+			builder.append(" successfully adapted to this schedule");
+			builder.append(people_adapted.isEmpty() ? "." : ":\n");
+			if (!people_adapted.isEmpty())
+			{
+				builder.append(StringUtils.join(people_adapted, ", "));
+			}
 		}
-		channel.sendMessage(currentMessage).complete();
+		channel.sendMessage(builder.toString()).complete();
 		return true;
 	}
 

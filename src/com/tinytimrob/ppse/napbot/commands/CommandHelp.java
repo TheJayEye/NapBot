@@ -76,7 +76,6 @@ public class CommandHelp implements ICommand
 		output.add("**To count number of people on each schedule:** Type `" + prefix + "schedulecount`.");
 		output.add("**To list all members sorted by schedule:** Type `" + prefix + "memberlist`.");
 		output.add("**To list all members with napcharts set:** Type `" + prefix + "chartlist`.");
-		output.add("**To list all members who have adapted to at least one schedule:** Type `" + prefix + "adaptedlist`.");
 		output.add("-----------------------------------------------");
 		channel.sendMessage(StringUtils.join(output, '\n')).complete();
 		return true;
