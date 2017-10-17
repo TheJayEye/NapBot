@@ -90,18 +90,19 @@ public class CommandAboutSchedule implements ICommand
 				String en = m.getEffectiveName();
 				NapSchedule s = CommonPolyStuff.determineScheduleFromMemberName(en);
 				String suf = " [" + s.name + "]";
-				// is this the user's current schedule?
-				if (s == this.schedule)
+				// strip schedule name from username
+				if (s == this.schedule && en.endsWith(suf))
 				{
-					if (en.endsWith(suf))
-					{
-						en = en.substring(0, en.length() - suf.length());
-					}
-					people_on_schedule.add(en.replace("_", "\\_").replace("*", "\\*"));
+					en = en.substring(0, en.length() - suf.length());
 				}
 				else if (en.contains(" [") && en.endsWith("]"))
 				{
 					en = en.substring(0, en.lastIndexOf(" ["));
+				}
+				// is this the user's current schedule?
+				if (s == this.schedule)
+				{
+					people_on_schedule.add(en.replace("_", "\\_").replace("*", "\\*"));
 				}
 				// did this user attempt this schedule in the past?
 				int tagcount = 0;
