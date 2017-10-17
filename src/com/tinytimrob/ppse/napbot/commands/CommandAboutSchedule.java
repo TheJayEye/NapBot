@@ -138,16 +138,19 @@ public class CommandAboutSchedule implements ICommand
 		if (this.schedule != NapSchedule.MONO)
 		{
 			// Determine how many people attempted the schedule and so forth
-			builder.append(this.pluralize(attemptedcount, "**0 members**", "**", " member**", "**", " members**") + " (" + CommonUtils.formatPercentage(attemptedcount, membercount, 2) + ") ");
-			builder.append(attemptedcount == 1 ? "has" : "have");
-			builder.append(" attempted this schedule.\n\n");
+			builder.append("Attempted: ");
+			builder.append("**" + attemptedcount + " / " + membercount + "** (" + CommonUtils.formatPercentage(attemptedcount, membercount, 2) + ") ");
+			//builder.append(attemptedcount == 1 ? "has" : "have");
+			//builder.append(" attempted this schedule.");
+			builder.append("\n\n");
 		}
 		if (!people_on_schedule.isEmpty())
 		{
-			builder.append(this.pluralize(people_on_schedule.size(), "**0 members**", "**", " member**", "**", " members**") + " (" + CommonUtils.formatPercentage(people_on_schedule.size(), membercount, 2) + " of members, " + CommonUtils.formatPercentage(people_on_schedule.size(), attemptedcount, 2) + " of attempted) ");
-			builder.append(people_on_schedule.size() == 1 ? "is" : "are");
-			builder.append(" currently on this schedule");
-			builder.append(people_on_schedule.isEmpty() ? "." : ":\n");
+			builder.append("Currently on this schedule: ");
+			builder.append("**" + people_on_schedule.size() + " / " + membercount + "** (" + CommonUtils.formatPercentage(people_on_schedule.size(), membercount, 2) + " of members, " + CommonUtils.formatPercentage(people_on_schedule.size(), attemptedcount, 2) + " of attempted)");
+			//builder.append(people_on_schedule.size() == 1 ? " is" : " are");
+			//builder.append(" currently on this schedule");
+			builder.append(people_on_schedule.isEmpty() ? "" : ":\n");
 			if (!people_on_schedule.isEmpty())
 			{
 				builder.append(StringUtils.join(people_on_schedule, ", "));
@@ -156,10 +159,11 @@ public class CommandAboutSchedule implements ICommand
 		}
 		if (this.schedule != NapSchedule.MONO)
 		{
-			builder.append(this.pluralize(people_adapted.size(), "**0 members**", "**", " member**", "**", " members**") + " (" + CommonUtils.formatPercentage(people_adapted.size(), membercount, 2) + " of members, " + CommonUtils.formatPercentage(people_adapted.size(), attemptedcount, 2) + " of attempted) ");
-			builder.append(people_adapted.size() == 1 ? "has" : "have");
-			builder.append(" successfully adapted to this schedule");
-			builder.append(people_adapted.isEmpty() ? "." : ":\n");
+			builder.append("Adapted: ");
+			builder.append("**" + people_adapted.size() + " / " + membercount + "** (" + CommonUtils.formatPercentage(people_adapted.size(), membercount, 2) + " of members, " + CommonUtils.formatPercentage(people_adapted.size(), attemptedcount, 2) + " of attempted)");
+			//builder.append(people_adapted.size() == 1 ? " has" : " have");
+			//builder.append(" successfully adapted to this schedule");
+			builder.append(people_adapted.isEmpty() ? "" : ":\n");
 			if (!people_adapted.isEmpty())
 			{
 				builder.append(StringUtils.join(people_adapted, ", "));
