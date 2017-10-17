@@ -43,11 +43,6 @@ public class CommandAboutSchedule implements ICommand
 		return true;
 	}
 
-	private String pluralize(int value, String none, String singular_pr, String singular_ps, String plural_pr, String plural_ps)
-	{
-		return value == 0 ? none : value == 1 ? singular_pr + value + singular_ps : plural_pr + value + plural_ps;
-	}
-
 	@Override
 	public boolean execute(User user, TextChannel channel, String command, List<String> parameters, Message message) throws Exception
 	{
