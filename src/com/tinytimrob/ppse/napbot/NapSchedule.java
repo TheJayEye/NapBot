@@ -2,15 +2,15 @@ package com.tinytimrob.ppse.napbot;
 
 public enum NapSchedule
 {
-	BIPHASIC("Biphasic", "Biphasic", NapRole.BIPHASIC,//
-			"30lbn", //
-			"6 hours 20 minutes", //
-			"Origin of Everyman sleep, biphasic sleep", //
-			"1 long core sleep, 1 short nap", //
-			"Two sleeps per day, main sleep through graveyard hours and a little rest around noon. Main sleep resembles monophasic sleep the most.", //
-			"Very easy", //
-			"Core at midnight, nap around noon", //
-			"Most commonly used", //
+	BIMAXION("Bimaxion", "Bimaxion", NapRole.DUAL_CORE,//
+			"qamnm", //
+			"4 hours", //
+			"Dual Core sleep, Dymaxion naps", //
+			"2 core sleeps of minimum length, 2 naps, and the late Dymaxion nap can contain both SWS and REM.", //
+			"One core sleep before midnight, one around dawn, Dymaxion noon nap, and Dymaxion afternoon nap. Sleep stage division: Dusk core SWS, dawn core REM. Late nap can contain mixed sleep stages. More flexible than Dymaxion because there are 2 core sleeps to gain SWS and so 2 naps can be moved around to some extent.", //
+			"Super hard", //
+			"The whole schedule’s sleep distribution looks like Dymaxion's- one core before midnight, one core around dawn, one noon nap, one afternoon/evening nap.", //
+			"Very low", //
 			""), //
 	DC1("DC1", "Dual Core 1", NapRole.DUAL_CORE,//
 			"ugn4g", //
@@ -47,10 +47,10 @@ public enum NapSchedule
 			"4 hours 20 minutes", //
 			"Dual Core sleep", //
 			"2 core sleeps, 4 naps", //
-			"Transitional variant of DC3 with 4 naps that follows Uberman rhythm. One core sleep before midnight, one after midnight, dawn nap, mid-morning nap, mid-afternoon nap, and evening nap. Sleep stage division: Dusk core SWS, night core REM. Several of the naps are likely to be mixed-stage naps.", //
+			"Transitional variant of DC3 with 4 naps that follows Uberman rhythm. One core sleep before midnight, one after midnight, dawn nap, mid-morning nap, mid-afternoon nap, and evening nap. Sleep stage division: First core SWS, second core mixed, naps REM.", //
 			"Very hard", //
 			"Sleeps are scheduled to start every 4 hours which resembles Uberman. Transition step to E5 or Uberman and also useful as a fallback from E5 or Uberman should adaptation fail.", //
-			"Virtually non-existent, generally inferior to DC3 unless keeping Uberman rhythm is useful", //
+			"Virtually non-existent, generally inferior to DC3 unless keeping Uberman rhythm is useful (the extra nap leads to slower sleep onset)", //
 			""), //
 	DYMAXION("Dymaxion", "Dymaxion", NapRole.SUPERHUMAN,//
 			"zgqtz", //
@@ -61,7 +61,17 @@ public enum NapSchedule
 			"Almost impossible", //
 			"Arranging naps to fit in 4 aforementioned circadian needs to rest", //
 			"Decent", //
-			""), //
+			"This schedule is **below the minimum sleep threshold of most people** and consequently has a **very low success rate**.  It is **strongly recommended** that inexperienced polyphasers do **NOT** attempt this schedule."), //
+	E1("E1", "Everyman 1", NapRole.BIPHASIC,//
+			"30lbn", //
+			"6 hours 20 minutes", //
+			"Origin of Everyman sleep, biphasic sleep", //
+			"1 long core sleep, 1 short nap", //
+			"Two sleeps per day, main sleep through graveyard hours and a little rest around noon. Main sleep resembles monophasic sleep the most.", //
+			"Very easy", //
+			"Core at midnight, nap around noon", //
+			"Most commonly used", //
+			"**Not to be confused with Siesta.** The E1 schedule has 1 core + 1 nap, whereas the Siesta schedule has 1 long core + 1 short core"), //
 	E2("E2", "Everyman 2", NapRole.EVERYMAN,//
 			"fflmu", //
 			"5 hours 10 minutes", //
@@ -91,7 +101,7 @@ public enum NapSchedule
 			"Extremely hard", //
 			"Core before midnight, 2 naps before the day starts, noon nap, afternoon nap", //
 			"Low", //
-			""), //
+			"This schedule is **below the minimum sleep threshold of most people** and consequently has a **very low success rate**.  It is **strongly recommended** that inexperienced polyphasers do **NOT** attempt this schedule."), //
 	E5("E5", "Everyman 5", NapRole.EVERYMAN,//
 			"coamr", //
 			"3 hours 10 minutes", //
@@ -100,8 +110,8 @@ public enum NapSchedule
 			"Transitional variant of E4 with 5 naps that follows Uberman rhythm. 1 core sleep before midnight to gain as much SWS as possible, graveyard nap, dawn nap, mid-morning nap, mid-afternoon nap, and evening nap. A combination of REM-only and mixed-stage naps is likely.", //
 			"Extremely hard", //
 			"Sleeps are scheduled to start every 4 hours which resembles Uberman. Transition step between DC4 and Uberman and also useful as a fallback from Uberman should adaptation fail.", //
-			"Non-existent, generally inferior to E4 unless keeping Uberman rhythm is useful", //
-			""), //
+			"Virtually non-existent, generally inferior to E4 unless keeping Uberman rhythm is useful (the extra nap leads to slower sleep onset)", //
+			"This schedule is **below the minimum sleep threshold of most people** and consequently has a **very low success rate**.  It is **strongly recommended** that inexperienced polyphasers do **NOT** attempt this schedule."), //
 	NAPTATION("Naptation", "Naptation", NapRole.SUPERHUMAN,//
 			"90uzo", //
 			"Up to 4 hours (up to 12 20-min naps per day)", //
@@ -112,16 +122,6 @@ public enum NapSchedule
 			"Nap once every 1.7 hours", //
 			"Rising", //
 			""), //
-	QUADPHASIC("Quadphasic", "Quadphasic", NapRole.DUAL_CORE,//
-			"qamnm", //
-			"4 hours", //
-			"Dual Core sleep, Dymaxion naps", //
-			"2 core sleeps of minimum length, 2 naps, and the late Dymaxion nap can contain both SWS and REM.", //
-			"One core sleep before midnight, one around dawn, Dymaxion noon nap, and Dymaxion afternoon nap. Sleep stage division: Dusk core SWS, dawn core REM. Late nap can contain mixed sleep stages. More flexible than Dymaxion because there are 2 core sleeps to gain SWS and so 2 naps can be moved around to some extent.", //
-			"Super hard", //
-			"The whole schedule’s sleep distribution looks like Dymaxion's- one core before midnight, one core around dawn, one noon nap, one afternoon/evening nap.", //
-			"Very low", //
-			""), //
 	SPAMAYL("SPAMAYL", "Sleep Polyphasically As Much As You Like", NapRole.SUPERHUMAN,//
 			"yh1pp", //
 			"Undefined, but on average 2.5 hours (7-8 20-min naps per day)", //
@@ -131,12 +131,12 @@ public enum NapSchedule
 			"Super hard", //
 			"Most naps should be spread during graveyard hours to avoid the need to nap during the day with work, social life, etc", //
 			"Rather low", //
-			""), //
+			"This schedule is **below the minimum sleep threshold of most people** and consequently has a **very low success rate**.  It is **strongly recommended** that inexperienced polyphasers do **NOT** attempt this schedule."), //
 	SEGMENTED("Segmented", "Segmented", NapRole.BIPHASIC,//
 			"k0mot", //
 			"7 hours", //
 			"Origin of Dual Core sleep, biphasic sleep", //
-			"2 core sleeps", //
+			"2 core sleeps, with a short gap between them", //
 			"Two sleeps per day, one sleep in the first half of the night (gives mostly SWS), another sleep in the second half of the night (gives mostly REM), 2-hour wake between 2 cores to trigger sleep stage division between 2 cores", //
 			"Medium easy", //
 			"1 core around 21:00, should not be later than 22:00ish, 1 core till morning", //
@@ -146,12 +146,12 @@ public enum NapSchedule
 			"e72xy", //
 			"6 hours 30 minutes", //
 			"Biphasic sleep", //
-			"1 long core sleep, 1 long nap", //
-			"Two sleeps per day, main sleep through most of the night, a long rest around noon (max-length nap)", //
+			"1 long core + 1 short core, placed roughly opposite each other", //
+			"Two sleeps per day. Main sleep through most of the night with a long rest of 1 full cycle around noon", //
 			"Extremely easy", //
-			"Core around midnight, nap at noon", //
-			"Europe, generally inferior to Biphasic", //
-			""), //
+			"Core around midnight, siesta at noon", //
+			"Europe, generally inferior to E1", //
+			"**Not to be confused with E1.** The E1 schedule has 1 core + 1 nap, whereas the Siesta schedule has 1 long core + 1 short core"), //
 	TESLA("Tesla", "Tesla", NapRole.SUPERHUMAN,//
 			"s2x5u", //
 			"1 hour 20 minutes", //
@@ -161,7 +161,7 @@ public enum NapSchedule
 			"Almost impossible", //
 			"Arranging naps to fit in 4 aforementioned circadian needs to rest", //
 			"Very low", //
-			""), //
+			"This schedule is **below the minimum sleep threshold of most people** and consequently has a **very low success rate**.  It is **strongly recommended** that inexperienced polyphasers do **NOT** attempt this schedule."), //
 	TC1("TC1", "Tri Core 1", NapRole.TRI_CORE,//
 			"tocl4", //
 			"4 hours 50 minutes", //
@@ -182,16 +182,16 @@ public enum NapSchedule
 			"Evening core, graveyard core, dawn core and 2 daytime naps", //
 			"Very low", //
 			""), //
-	TRIMAXION("Trimaxion", "Trimaxion", NapRole.EXPERIMENTAL,//
+	TRIMAXION("Trimaxion", "Trimaxion", NapRole.EVERYMAN,//
 			"awkwb", //
 			"3 hours", //
 			"Everyman sleep, Dymaxion naps", //
 			"1 core sleep of minimum length (one full cycle), 3 Dymaxion naps", //
 			"4 sleeps per day. Core sleep before midnight for most SWS, naps for REM/mixed stages. Circadian spots include: Core sleep around dusk, dawn nap, noon nap, and evening nap. Mixed-stage nap(s) in all 3 naps, or possibly pure-REM or pure-SWS nap. More flexible than Dymaxion because of having a core sleep, so after adaptation 3 naps can be moved around when convenient.", //
 			"Extremely hard", //
-			"Distribution of sleeps resembles Dymaxion's and Quadphasic's. Transition step to Dymaxion and also as a fallback from Dymaxion should adaptation fail.", //
+			"Distribution of sleeps resembles Dymaxion's and Bimaxion's. Transition step to Dymaxion and also as a fallback from Dymaxion should adaptation fail.", //
 			"Virtually non-existent", //
-			"This is an **experimental schedule** currently being tested. Results unknown. No signs of successful adaptations."), //
+			"This schedule is **below the minimum sleep threshold of most people** and consequently has a **very low success rate**.  It is **strongly recommended** that inexperienced polyphasers do **NOT** attempt this schedule."), //
 	TRIPHASIC("Triphasic", "Triphasic", NapRole.TRI_CORE,//
 			"8z46u", //
 			"4 hours 30 minutes", //
@@ -211,19 +211,7 @@ public enum NapSchedule
 			"Extremely hard", //
 			"Time slots free for rotation, and equidistant sleep is recommended", //
 			"Very high", //
-			""), //
-	/*
-	ZOIDBERG("Zoidberg", "Zoidberg", NapRole.EXPERIMENTAL,//
-			"m7hpg", //
-			"Around 3-4 hours", //
-			"Ultrashort naps", //
-			"Multiple 20-min short naps, core sleep simulation", //
-			"Multiple 20-min naps are stacked together; one wakes up after 20-min nap then go back to sleep immediately for another 20-min nap. Rinse and repeat. Naps can be stacked together any time possible, as many as needed, or just 1 20-min nap at a time is needed, in case of emergency. The stacked 20-min naps can form a disrupted core sleep/ longer nap. Theoretically the naps prevent one from reaching the completely wakeful state while one still remains somewhat in a sleepy state (last minutes of REM) to ease fall asleep back and as a way to \"resume\" the sleep cycle from lighter stages of sleep (or continuing in REM and SWS); however, it still grants the ability to nap in only 20 minutes. The schedule creates an impression of having both a \"core\" sleep for sustainability like any other schedules with at least one continuous core sleep, while containing multiple small power naps to promote vivid dreams. After adaptation, it is assumed that adapters can stack naps or take lone nap whenever they are sleepy enough, similar to SPAMAYL.", //
-			"Unknown", //
-			"Stack naps in the night, avoid napping much in the day.", //
-			"Virtually non-existent", //
-			"This is an **experimental schedule** currently being tested. Results unknown. No signs of successful adaptations."), //
-	*/
+			"This schedule is **below the minimum sleep threshold of most people** and consequently has a **very low success rate**.  It is **strongly recommended** that inexperienced polyphasers do **NOT** attempt this schedule."), //
 	EXPERIMENTAL("Experimental", "Experimental", NapRole.EXPERIMENTAL,//
 			"", //
 			"", //

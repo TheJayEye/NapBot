@@ -58,15 +58,6 @@ public class CommonPolyStuff
 			case "monophasic":
 				schedule = NapSchedule.MONO;
 				break;
-			case "quad":
-				schedule = NapSchedule.QUADPHASIC;
-				break;
-			case "tri":
-				schedule = NapSchedule.TRIPHASIC;
-				break;
-			case "bi":
-				schedule = NapSchedule.BIPHASIC;
-				break;
 			case "tricore":
 			case "tri-core":
 			case "tri_core":
