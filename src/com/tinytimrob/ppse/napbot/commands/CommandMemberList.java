@@ -74,6 +74,7 @@ public class CommandMemberList implements ICommand
 			currentMessage = currentMessage + "\n---\r" + MSG;
 		}
 		int LENGTH_LIMIT = 1900;
+		boolean first = true;
 		while (!currentMessage.isEmpty())
 		{
 			// now we have to split apart the current message to get the message to be sent. had to alter how this works due to UNKNOWN on the main server now being too long
@@ -91,10 +92,11 @@ public class CommandMemberList implements ICommand
 				}
 				splitMessage = currentMessage.substring(0, Math.min(currentMessage.length(), cutoffPoint));
 			}
-			currentMessage = (splitMessage.length() == currentMessage.length() ? "" : ".\n" + currentMessage.substring(splitMessage.length() + 1));
+			currentMessage = (splitMessage.length() == currentMessage.length() ? "" : currentMessage.substring(splitMessage.length() + 1));
 			if (!splitMessage.isEmpty())
 			{
-				channel.sendMessage(splitMessage.replaceAll("\u001F", " ").replaceAll("\r", "\n")).complete();
+				channel.sendMessage((first ? "" : ".\n") + splitMessage.replaceAll("\u001F", " ").replaceAll("\r", "\n")).complete();
+				first = false;
 			}
 		}
 		return true;

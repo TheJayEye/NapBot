@@ -66,7 +66,7 @@ public class CommandHelp implements ICommand
 		output = new ArrayList<String>();
 		output.add("-");
 		output.add("-----------------------------------------------");
-		output.add("**To set your sleep schedule:** Type `" + prefix + "set` followed by a supported schedule name. For example, if you wanted to change your schedule to DC1, you would type `" + prefix + "set DC1`. You may also specify a schedule variant by using a dash separator, e.g. `" + prefix + "set DC1-extended` (supported variants are `shortened` `extended` `flipped` `modified` and `mutated`). Experimental unlisted schedules can be set with `" + prefix + "set Experimental`.");
+		output.add("**To set your sleep schedule:** Type `" + prefix + "set` followed by a supported schedule name. For example, if you wanted to change your schedule to DC1, you would type `" + prefix + "set DC1`. You may also specify a schedule variant by using a dash separator, e.g. `" + prefix + "set DC1-extended` (supported variants are `shortened` `extended` `flipped` `modified` `mutated` and `recovery`). Experimental unlisted schedules can be set with `" + prefix + "set Experimental`.");
 		output.add("**To set your napchart:** Type `" + prefix + "set` followed by the napchart link. For example, `" + prefix + "set https://napchart.com/ro1mi`. To remove your chart instead, use `none` in place of a link.");
 		output.add("**To set both at the same time:** Just specify both. For example, `" + prefix + "set DC1 https://napchart.com/ro1mi`");
 		output.add("(Please note that if you change schedules without also setting a napchart, any existing napchart you have will be automatically removed.)");

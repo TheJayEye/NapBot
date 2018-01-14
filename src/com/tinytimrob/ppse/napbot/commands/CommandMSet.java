@@ -66,7 +66,7 @@ public class CommandMSet implements ICommand
 			Pair<NapSchedule, NapScheduleVariant> newSchedulePair = CommonPolyStuff.setSchedule(user, channel, schedule);
 			if (newSchedulePair == null || newSchedulePair.getLeft() == null)
 			{
-				channel.sendMessage("`" + schedule + "` doesn't seem to be a valid sleep schedule.\n\nTry specifying one of the following sleep schedules: " + NapSchedule.getScheduleList() + ". You may also specify a schedule variant by using a dash separator, e.g. `DC1-extended` (supported variants are `shortened` `extended` `flipped` `modified` and `mutated`).\n\nFor more detailed usage instructions, type `" + NapBot.CONFIGURATION.messagePrefix + "help` or `" + NapBot.CONFIGURATION.messagePrefix + "mhelp`.").complete();
+				channel.sendMessage("`" + schedule + "` doesn't seem to be a valid sleep schedule.\n\nTry specifying one of the following sleep schedules: " + NapSchedule.getScheduleList() + ". You may also specify a schedule variant by using a dash separator, e.g. `DC1-extended` (supported variants are `shortened` `extended` `flipped` `modified` `mutated` and `recovery`).\n\nFor more detailed usage instructions, type `" + NapBot.CONFIGURATION.messagePrefix + "help` or `" + NapBot.CONFIGURATION.messagePrefix + "mhelp`.").complete();
 				return true;
 			}
 			else

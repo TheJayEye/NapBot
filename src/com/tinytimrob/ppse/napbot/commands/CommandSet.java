@@ -57,7 +57,7 @@ public class CommandSet implements ICommand
 				Pair<NapSchedule, NapScheduleVariant> newSchedulePair = CommonPolyStuff.setSchedule(user, channel, param);
 				if (newSchedulePair == null || newSchedulePair.getLeft() == null)
 				{
-					channel.sendMessage("I don't know what you mean by `" + NapBot.CONFIGURATION.messagePrefix + "set " + param + "`. `" + param + "` doesn't seem to be a valid sleep schedule OR a valid napchart link.\n\n**If you are trying to change your sleep schedule:**\nTry specifying one of the following schedules: " + NapSchedule.getScheduleList() + ". You may also specify a schedule variant by using a dash separator, e.g. `DC1-extended` (supported variants are `shortened` `extended` `flipped` `modified` and `mutated`).\n\n**If you are trying to change your napchart:**\nCheck to make sure the link you pasted is not malformed.\n\nFor more detailed usage instructions, type `" + NapBot.CONFIGURATION.messagePrefix + "help`.").complete();
+					channel.sendMessage("I don't know what you mean by `" + NapBot.CONFIGURATION.messagePrefix + "set " + param + "`. `" + param + "` doesn't seem to be a valid sleep schedule OR a valid napchart link.\n\n**If you are trying to change your sleep schedule:**\nTry specifying one of the following schedules: " + NapSchedule.getScheduleList() + ". You may also specify a schedule variant by using a dash separator, e.g. `DC1-extended` (supported variants are `shortened` `extended` `flipped` `modified` `mutated` and `recovery`).\n\n**If you are trying to change your napchart:**\nCheck to make sure the link you pasted is not malformed.\n\nFor more detailed usage instructions, type `" + NapBot.CONFIGURATION.messagePrefix + "help`.").complete();
 					return true;
 				}
 				else
@@ -89,7 +89,7 @@ public class CommandSet implements ICommand
 				Pair<NapSchedule, NapScheduleVariant> newSchedulePair = CommonPolyStuff.setSchedule(user, channel, schedule);
 				if (newSchedulePair == null || newSchedulePair.getLeft() == null)
 				{
-					channel.sendMessage("`" + schedule + "` doesn't seem to be a valid sleep schedule.\n\nTry specifying one of the following sleep schedules: " + NapSchedule.getScheduleList() + ". You may also specify a schedule variant by using a dash separator, e.g. `DC1-extended` (supported variants are `shortened` `extended` `flipped` `modified` and `mutated`).\n\nIf you're already on the correct schedule and just want to set your napchart, you can do that by omitting the schedule name like so:\n`" + NapBot.CONFIGURATION.messagePrefix + "set " + napchart + "`\n\nFor more detailed usage instructions, type `" + NapBot.CONFIGURATION.messagePrefix + "help`.").complete();
+					channel.sendMessage("`" + schedule + "` doesn't seem to be a valid sleep schedule.\n\nTry specifying one of the following sleep schedules: " + NapSchedule.getScheduleList() + ". You may also specify a schedule variant by using a dash separator, e.g. `DC1-extended` (supported variants are `shortened` `extended` `flipped` `modified` `mutated` and `recovery`).\n\nIf you're already on the correct schedule and just want to set your napchart, you can do that by omitting the schedule name like so:\n`" + NapBot.CONFIGURATION.messagePrefix + "set " + napchart + "`\n\nFor more detailed usage instructions, type `" + NapBot.CONFIGURATION.messagePrefix + "help`.").complete();
 					return true;
 				}
 				else
