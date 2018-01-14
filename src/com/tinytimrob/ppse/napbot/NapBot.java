@@ -24,7 +24,6 @@ import com.tinytimrob.ppse.napbot.commands.CommandGet;
 import com.tinytimrob.ppse.napbot.commands.CommandHelp;
 import com.tinytimrob.ppse.napbot.commands.CommandMHelp;
 import com.tinytimrob.ppse.napbot.commands.CommandMSet;
-import com.tinytimrob.ppse.napbot.commands.CommandMSetNick;
 import com.tinytimrob.ppse.napbot.commands.CommandMSetTimestamp;
 import com.tinytimrob.ppse.napbot.commands.CommandMemberList;
 import com.tinytimrob.ppse.napbot.commands.CommandSay;
@@ -114,7 +113,6 @@ public class NapBot extends Application
 		NapBotListener.register(new CommandSay());
 		NapBotListener.register(new CommandMHelp());
 		NapBotListener.register(new CommandMSet());
-		NapBotListener.register(new CommandMSetNick());
 		NapBotListener.register(new CommandMSetTimestamp());
 		NapBotListener.register(new CommandScheduleCount());
 		NapBotListener.register(new CommandXHistoryDump());

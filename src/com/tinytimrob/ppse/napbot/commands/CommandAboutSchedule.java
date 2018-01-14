@@ -48,19 +48,24 @@ public class CommandAboutSchedule implements ICommand
 	{
 		ArrayList<String> info = new ArrayList<String>();
 		info.add("`" + this.schedule.name + "` (" + this.schedule.longName + ")"); // - <https://napchart.com/" + this.schedule.napchartID + "> - " + NapBot.CONFIGURATION.napchartUrlPrefix + this.schedule.napchartID);
+		info.add("-----------------------------------------------");
 		if (!this.schedule.experimental.isEmpty())
 		{
-			info.add("-----------------------------------------------");
 			info.add("_" + this.schedule.experimental + "_");
 			info.add("-----------------------------------------------");
 		}
+		info.add("- **Invented by:** " + this.schedule.inventor);
+		if (!this.schedule.alternativeNames.isEmpty())
+		{
+			info.add("- **Alternatively known as:** " + this.schedule.alternativeNames);
+		}
 		info.add("- **Total sleep:** " + this.schedule.totalSleep);
-		info.add("- **Identification:** " + this.schedule.identification);
+		info.add("- **Classification:** " + this.schedule.classification);
 		info.add("- **Specification:** " + this.schedule.specification);
 		info.add("- **Mechanism:** " + this.schedule.mechanism);
 		info.add("- **Adaptation difficulty:** " + this.schedule.difficulty);
 		info.add("- **Ideal scheduling:** " + this.schedule.scheduling);
-		info.add("- **Popularity:** " + this.schedule.popularity);
+		info.add("-----------------------------------------------");
 		MessageBuilder b = new MessageBuilder();
 		b.append(StringUtils.join(info, "\n"));
 		MessageEmbedImpl embedimpl = new MessageEmbedImpl();

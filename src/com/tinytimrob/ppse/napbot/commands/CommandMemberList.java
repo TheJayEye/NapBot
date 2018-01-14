@@ -64,26 +64,38 @@ public class CommandMemberList implements ICommand
 				memberCount++;
 			}
 		}
+		// make the message
 		String currentMessage = "There are **" + memberCount + "** members on this server.\n";
 		for (NapSchedule s : NapSchedule.values())
 		{
 			ArrayList<String> l = hm.get(s);
 			Collections.sort(l, String.CASE_INSENSITIVE_ORDER);
-			String MSG = "**" + s.name + "** (" + l.size() + "): " + StringUtils.join(l, ", ");
-			String MSG2 = currentMessage + "\n---\n" + MSG;
-			if (MSG2.length() > 2000)
-			{
-				channel.sendMessage(currentMessage).complete();
-				currentMessage = ".\n---\n" + MSG;
-			}
-			else
-			{
-				currentMessage = MSG2;
-			}
+			String MSG = "**" + s.name + "** (" + l.size() + "): " + StringUtils.join(l, ",\u001F");
+			currentMessage = currentMessage + "\n---\r" + MSG;
 		}
-		if (!currentMessage.isEmpty())
+		int LENGTH_LIMIT = 1900;
+		while (!currentMessage.isEmpty())
 		{
-			channel.sendMessage(currentMessage).complete();
+			// now we have to split apart the current message to get the message to be sent. had to alter how this works due to UNKNOWN on the main server now being too long
+			String splitMessage = currentMessage.substring(0, Math.min(currentMessage.length(), LENGTH_LIMIT));
+			if (currentMessage.length() > LENGTH_LIMIT)
+			{
+				int cutoffPoint = splitMessage.lastIndexOf("\n");
+				if (cutoffPoint == -1)
+				{
+					cutoffPoint = splitMessage.lastIndexOf("\u001F");
+				}
+				if (cutoffPoint == -1)
+				{
+					cutoffPoint = LENGTH_LIMIT;
+				}
+				splitMessage = currentMessage.substring(0, Math.min(currentMessage.length(), cutoffPoint));
+			}
+			currentMessage = (splitMessage.length() == currentMessage.length() ? "" : ".\n" + currentMessage.substring(splitMessage.length() + 1));
+			if (!splitMessage.isEmpty())
+			{
+				channel.sendMessage(splitMessage.replaceAll("\u001F", " ").replaceAll("\r", "\n")).complete();
+			}
 		}
 		return true;
 	}

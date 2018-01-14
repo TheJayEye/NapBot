@@ -139,20 +139,10 @@ public class CommonPolyStuff
 	{
 		List<Member> matchingMembers = new ArrayList<Member>();
 
-		if (match.startsWith("<@!") && match.contains(">"))
+		if (match.startsWith("<@") && match.contains(">"))
 		{
-			// match based on @mention
-			String id = match.substring(3, match.indexOf(">"));
-			Member member = channel.getGuild().getMemberById(id);
-			if (member != null)
-			{
-				matchingMembers.add(member);
-			}
-		}
-		else if (match.startsWith("<@") && match.contains(">"))
-		{
-			// why do some snowflakes start with ! and some not? wtf?
-			String id = match.substring(2, match.indexOf(">"));
+			// based on @mention. why do some snowflakes start with ! and some not? wtf?
+			String id = match.substring(match.startsWith("<@!") ? 3 : 2, match.indexOf(">"));
 			Member member = channel.getGuild().getMemberById(id);
 			if (member != null)
 			{

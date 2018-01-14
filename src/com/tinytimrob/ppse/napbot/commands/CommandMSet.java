@@ -44,7 +44,7 @@ public class CommandMSet implements ICommand
 
 		for (int i = 2; i < parameters.size(); i++)
 		{
-			memberString = memberString + parameters.get(i);
+			memberString = memberString + (i > 2 ? " " : "") + parameters.get(i);
 		}
 
 		Member matchedMember = CommonPolyStuff.findMemberMatch(channel, memberString);
